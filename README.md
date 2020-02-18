@@ -1,2 +1,2 @@
 # full-stack
-Full Stack application
+Full Stack application - Spring, Microservice and React
