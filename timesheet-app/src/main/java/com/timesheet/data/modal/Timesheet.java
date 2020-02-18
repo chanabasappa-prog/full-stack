@@ -3,10 +3,12 @@ package com.timesheet.data.modal;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 
 @Entity(name = "TIMESHEET")
 public class Timesheet {
@@ -18,8 +20,13 @@ public class Timesheet {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(name="employee_id")
 	private Long employeeId;
+	
+	@Column(name="timesheet_date")
 	private String timesheetDate;
+	
 	private Long  hours;
 	
 	public Long getId() {
