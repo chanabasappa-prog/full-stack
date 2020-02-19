@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.application.project.data.modal.ProjectDetails;
@@ -23,18 +26,18 @@ public class ProjectDetailsController {
 		
 	}
 
-	/*@GetMapping("phonebooks/{phoneBookId}")
-	public ProjectDetails getPhoneBookById(@PathVariable String phoneBookId) {
-		return phoneBookService.findById(Long.parseLong(phoneBookId));
+	@GetMapping("projectdetails/{projectdetailsId}")
+	public ProjectDetails getPhoneBookById(@PathVariable String projectdetailsId) {
+		return projectDetailsService.findById(Long.parseLong(projectdetailsId));
 	}
 	
 	@PostMapping("/phonebooks")
-    public ProjectDetails createPost(@Valid @RequestBody ProjectDetails phonebook) {
-		System.out.println(phonebook.getId() + " :: " + phonebook.getName());
-        return phoneBookService.save(phonebook);
+    public ProjectDetails createPost(@RequestBody ProjectDetails projectDetails) {
+		//System.out.println(phonebook.getId() + " :: " + phonebook.getName());
+        return projectDetailsService.save(projectDetails);
     }
 	
-	@DeleteMapping("phonebooks/{phoneBookId}")
+	/*@DeleteMapping("phonebooks/{phoneBookId}")
     public ResponseEntity<?> deletePost(@PathVariable Long phoneBookId) {
         ProjectDetails phonebook = phoneBookService.findById(phoneBookId);
         phoneBookService.delete(phonebook);
