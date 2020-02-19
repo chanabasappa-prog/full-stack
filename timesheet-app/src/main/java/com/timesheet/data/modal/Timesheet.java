@@ -25,7 +25,7 @@ public class Timesheet {
 	private Long employeeId;
 	
 	@Column(name="timesheet_date")
-	private String timesheetDate;
+	private Date timesheetDate;
 	
 	private Long  hours;
 	
@@ -41,10 +41,10 @@ public class Timesheet {
 	public void setEmployeeId(Long employeeId) {
 		this.employeeId = employeeId;
 	}
-	public String getTimesheetDate() {
+	public Date getTimesheetDate() {
 		return timesheetDate;
 	}
-	public void setTimesheetDate(String timesheetDate) {
+	public void setTimesheetDate(Date timesheetDate) {
 		this.timesheetDate = timesheetDate;
 	}
 	public Long getHours() {
