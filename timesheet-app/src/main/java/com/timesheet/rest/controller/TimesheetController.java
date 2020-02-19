@@ -24,19 +24,32 @@ public class TimesheetController {
 	@Autowired
     private TimesheetService timesheetsService;
 
-	@GetMapping("timesheets")
+	@GetMapping("/timesheets")
 	public List<Timesheet> getAllTimesheets() {
 		List<Timesheet> timesheets = timesheetsService.list();
+		System.out.println("getAllTimesheets() method called");
 		return timesheets;
 		
 	}
 
-	@GetMapping("timesheets/{timesheetId}")
+	@GetMapping("/timesheets/{timesheetId}")
 	public Timesheet getTimesheetById(@PathVariable String timesheetId) {
+		System.out.println("getTimesheetById() method called");
 		return timesheetsService.findById(Long.parseLong(timesheetId));
 	}
 	
-	@PostMapping("/timesheets")
+	@PostMapping("/save/timesheet")
+    public Timesheet createPost() {
+		Timesheet timesheet = new Timesheet();
+		timesheet.setEmployeeId(2l);
+		timesheet.setHours(8l);
+		timesheet.setTimesheetDate("18/02/2020");
+		System.out.println(timesheet.getId() + " :: " + timesheet.getEmployeeId());
+        return timesheetsService.save(timesheet);
+    }
+	
+	
+	/*@PostMapping("/timesheets")
     public Timesheet createPost(@Valid @RequestBody Timesheet timesheet) {
 		System.out.println(timesheet.getId() + " :: " + timesheet.getEmployeeId());
         return timesheetsService.save(timesheet);
@@ -47,5 +60,5 @@ public class TimesheetController {
 		Timesheet timesheet = timesheetsService.findById(timesheetId);
 		timesheetsService.delete(timesheet);
         return ResponseEntity.ok().build();
-    }
+    }*/
 }
