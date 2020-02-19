@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Bootstrap 4, from LayoutIt!</title>
+
+<meta name="description"
+	content="Source code generated using layoutit.com">
+<meta name="author" content="LayoutIt!">
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<a id="modal-926615" href="#modal-container-926615" role="button"
+					class="btn" data-toggle="modal">Add Phonebook</a>
+
+				<div class="modal fade" id="modal-container-926615" role="dialog"
+					aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="myModalLabel">Add Phonebook</h5>
+								<button type="button" class="close" data-dismiss="modal">
+									<span aria-hidden="true">×</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<form>
+									<div class="form-group">
+										<label for="exampleInputEmail1">Name</label> <input
+											type="text" class="form-control" id="name"
+											placeholder="Phone Book Name">
+									</div>
+
+								</form>
+							</div>
+							<div class="modal-footer">
+
+								<button type="button" id="addPhonebook" class="btn btn-primary">Add
+								</button>
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Close</button>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+
+				<div class="modal fade" id="modal-container-92661511" role="dialog"
+					aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="myModalLabel">Add Contact</h5>
+								<button type="button" class="close" data-dismiss="modal">
+									<span aria-hidden="true">×</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<form>
+									<div class="form-group">
+										<label for="exampleInputEmail1">Name</label> <input
+											type="text" class="form-control" id="contactName"
+											placeholder="Contact Name">
+									</div>
+
+								</form>
+							</div>
+							<div class="modal-footer">
+
+								<button type="button" id="addContact" class="btn btn-primary">Add
+								</button>
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Close</button>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+				<h2>Phonebook</h2>
+
+				<table class="table table-sm table-striped table-hover">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Name</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody id="phonebookTable">
+
+					</tbody>
+				</table>
+				<h2>Contacts</h2>
+				<a id="modal-9266151" href="#modal-container-92661511" role="button"
+					class="btn" data-toggle="modal">Add Contact</a>
+					
+					
+				<form class="form-inline">
+					
+					<div class="form-group mx-sm-3 mb-2">
+						<label for="inputPassword2" class="sr-only">Search by name</label> <input
+							type="text" class="form-control" id="nameSearch"
+							placeholder="Search by name">
+					</div>
+					<button type="button" id="searchContact" class="btn btn-primary mb-2">Search Contact</button>
+				</form>
+				<table class="table table-sm table-striped table-hover">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Name</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody id="contactTable">
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/scripts.js"></script>
+
+	<script>
+		var phoneBookId;
+		$(document).ready(function() {
+
+			loadTable();
+
+			$("#addPhonebook").click(function() {
+				console.log("Handler for .click() called.");
+				$.ajax({
+					contentType : 'application/json',
+					data : JSON.stringify({
+						"name" : $("#name").val()
+					}),
+					dataType : 'json',
+					success : function(data) {
+						console.log("device control succeeded");
+						$('#modal-container-926615').modal('toggle');
+						loadTable();
+					},
+					error : function() {
+						console.log("Device control failed");
+					},
+					processData : false,
+					type : 'POST',
+					url : 'phonebooks'
+				});
+			});
+
+			$("#addContact").click(function() {
+				console.log("Handler for .click() called.");
+				$.ajax({
+					contentType : 'application/json',
+					data : JSON.stringify({
+						"name" : $("#contactName").val()
+					}),
+					dataType : 'json',
+					success : function(data) {
+						console.log("device control succeeded");
+						$('#modal-container-92661511').modal('toggle');
+						getContacts(phoneBookId);
+					},
+					error : function() {
+						console.log("Device control failed");
+					},
+					processData : false,
+					type : 'POST',
+					url : 'phonebooks/' + phoneBookId + '/contacts'
+				});
+			});
+			
+			$("#searchContact").click(function() {
+				$
+				.ajax({
+					url : "/phonebooks/" + phoneBookId + "/contacts/"+$("#nameSearch").val(),
+					contentType : "application/json",
+					dataType : 'json',
+					success : function(result) {
+						$('#contactTable').empty();
+						console.log(result);
+						// var data = $.parseJSON(result);
+						$
+								.each(
+										result,
+										function(i, item) {
+											console.log(item.id + " : "
+													+ item.name);
+											$('#contactTable')
+													.append(
+															'<tr><td>'
+																	+ item.id
+																	+ '</td><td>'
+																	+ item.name
+																	+ '</td>'
+																	+ '<td><a href="#" onClick="deleteContact('
+																	+ item.id
+																	+ ')">Delete</a></tr>');
+											/* var phonebook = jQuery.parseJSON(item);
+											console.log(phonebook.name) */
+										});
+					}
+				})
+			});
+			
+			
+
+		});
+
+		function loadTable() {
+			$
+					.ajax({
+						url : "/phonebooks",
+						contentType : "application/json",
+						dataType : 'json',
+						success : function(result) {
+							$('#phonebookTable').empty();
+							console.log(result);
+							// var data = $.parseJSON(result);
+							$
+									.each(
+											result,
+											function(i, item) {
+												console.log(item.id + " : "
+														+ item.name);
+												$('#phonebookTable')
+														.append(
+																'<tr><td>'
+																		+ item.id
+																		+ '</td><td>'
+																		+ '<a href="#" onClick="getContacts('
+																		+ item.id
+																		+ ')">'
+																		+ item.name
+																		+ '</a></td>'
+																		+ '<td><a href="#" onClick="deletePhoneBook('
+																		+ item.id
+																		+ ')">Delete</a></tr>');
+												/* var phonebook = jQuery.parseJSON(item);
+												console.log(phonebook.name) */
+											});
+						}
+					})
+		}
+
+		function deletePhoneBook(id) {
+			console.log("delete :  " + id)
+			$.ajax({
+				type : "DELETE",
+				url : "/phonebooks/" + id,
+				success : function(result) {
+					loadTable();
+				}
+			})
+		}
+		function deleteContact(id) {
+			console.log("delete :  " + id)
+			$.ajax({
+				type : "DELETE",
+				url : "/phonebooks/" + phoneBookId + "/contacts/" + id,
+				success : function(result) {
+					getContacts(phoneBookId);
+				}
+			})
+		}
+
+		function getContacts(id) {
+			phoneBookId = id;
+			$
+					.ajax({
+						url : "/phonebooks/" + id + "/contacts",
+						contentType : "application/json",
+						dataType : 'json',
+						success : function(result) {
+							$('#contactTable').empty();
+							console.log(result);
+							// var data = $.parseJSON(result);
+							$
+									.each(
+											result,
+											function(i, item) {
+												console.log(item.id + " : "
+														+ item.name);
+												$('#contactTable')
+														.append(
+																'<tr><td>'
+																		+ item.id
+																		+ '</td><td>'
+																		+ item.name
+																		+ '</td>'
+																		+ '<td><a href="#" onClick="deleteContact('
+																		+ item.id
+																		+ ')">Delete</a></tr>');
+												/* var phonebook = jQuery.parseJSON(item);
+												console.log(phonebook.name) */
+											});
+						}
+					})
+		}
+	</script>
+
+</body>
+</html>
