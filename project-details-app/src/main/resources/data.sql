@@ -1,10 +1,9 @@
-insert into phonebook values (1, 'Home');
-insert into phonebook values (2, 'Office');
+insert into projectdetails (id  , name, start_date, end_date) values (1, 'Medi Switch', TO_DATE('2003/05/03', 'yyyy/mm/dd'),TO_DATE('2013/05/03', 'yyyy/mm/dd'));
+insert into projectdetails (id  , name, start_date, end_date) values (2, 'NIMS', TO_DATE('2003/05/03', 'yyyy/mm/dd'),TO_DATE('2013/05/03', 'yyyy/mm/dd'));
+insert into projectdetails (id  , name, start_date, end_date) values (3, 'Fundamo', TO_DATE('2003/05/03', 'yyyy/mm/dd'),TO_DATE('2013/05/03', 'yyyy/mm/dd'));
+insert into projectdetails (id  , name, start_date, end_date) values (4, 'Multi Choice', TO_DATE('2003/05/03', 'yyyy/mm/dd'),TO_DATE('2013/05/03', 'yyyy/mm/dd'));
+insert into projectdetails (id  , name, start_date, end_date) values (5, 'Facebook', TO_DATE('2003/05/03', 'yyyy/mm/dd'),TO_DATE('2013/05/03', 'yyyy/mm/dd'));
+insert into projectdetails (id  , name, start_date, end_date) values (6, 'Google', TO_DATE('2003/05/03', 'yyyy/mm/dd'),TO_DATE('2013/05/03', 'yyyy/mm/dd'));
 
+insert into employeeprojectdetails (id  , name, allocation_date, de_allocation_date, project_details_id) values (6, 'Google', TO_DATE('2003/05/03', 'yyyy/mm/dd'),TO_DATE('2013/05/03', 'yyyy/mm/dd'),1);
 
-insert into contact values(1,'Dries',1);
-insert into contact values(2,'Dian',1);
-insert into contact values(3,'Chilton',1);
-insert into contact values(4,'Charles',1);
-insert into contact values(5,'Clayton',1);
-insert into contact values(6,'Danyal',1);
