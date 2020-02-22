@@ -2,14 +2,18 @@ version: '3'
 
 services: 
   docker-mysql:
-    image: mysql/mysql-server:latest
+    image: mysql/mysql-server
     environment:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=db_example
+      - MYSQL_USER=root
       - MYSQL_PASSWORD=password
+    ports:
+      - 3306:3306
   spring-boot-jpa-docker-webapp:
     image: hunaidspring
     depends_on:
       - docker-mysql
     ports:
       - 9090:9090
+    
