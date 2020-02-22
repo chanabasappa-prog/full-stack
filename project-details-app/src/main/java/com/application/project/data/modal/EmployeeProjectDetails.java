@@ -37,10 +37,51 @@ public class EmployeeProjectDetails {
 	private Date deAllocationDate;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "projectDetails_id", nullable = false)
+    @JoinColumn(name = "project_details_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private ProjectDetails projectDetails;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Date getAllocationDate() {
+		return allocationDate;
+	}
+
+	public void setAllocationDate(Date allocationDate) {
+		this.allocationDate = allocationDate;
+	}
+
+	public Date getDeAllocationDate() {
+		return deAllocationDate;
+	}
+
+	public void setDeAllocationDate(Date deAllocationDate) {
+		this.deAllocationDate = deAllocationDate;
+	}
+
+	public ProjectDetails getProjectDetails() {
+		return projectDetails;
+	}
+
+	public void setProjectDetails(ProjectDetails projectDetails) {
+		this.projectDetails = projectDetails;
+	}
+	
 	
 	
 }
