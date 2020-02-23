@@ -32,6 +32,7 @@ public class EmployeeProjectDetails {
 	
 	@Temporal(TemporalType.DATE)
 	private Date allocationDate;
+
 	
 	@Temporal(TemporalType.DATE)
 	private Date deAllocationDate;
