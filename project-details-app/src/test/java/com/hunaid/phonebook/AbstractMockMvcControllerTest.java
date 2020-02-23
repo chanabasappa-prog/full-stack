@@ -16,8 +16,8 @@ import org.springframework.test.web.servlet.MockMvc;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-@PropertySource("classpath:/application_test.properties")
-@ComponentScan("com.hunaid.phonebook")
+@PropertySource("classpath:/application.properties")
+@ComponentScan("com.application.project")
 public class AbstractMockMvcControllerTest {
 	
 
