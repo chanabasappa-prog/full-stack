@@ -31,7 +31,7 @@ public class ProjectDetailsController {
 		return projectDetailsService.findById(Long.parseLong(projectdetailsId));
 	}
 	
-	@PostMapping("/phonebooks")
+	@PostMapping("/projectdetails")
     public ProjectDetails createPost(@RequestBody ProjectDetails projectDetails) {
 		//System.out.println(phonebook.getId() + " :: " + phonebook.getName());
         return projectDetailsService.save(projectDetails);

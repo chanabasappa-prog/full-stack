@@ -16,9 +16,16 @@ public class EmployeeProjectDetailsController {
 	@Autowired
     private EmployeeProjectDetailsService employeeProjectDetailsService;
 	
-	@GetMapping("projectdetails/{projectDetailsId}/emnployees")
+	@GetMapping("projectdetails/{projectDetailsId}/employees")
 	public List<EmployeeProjectDetails> getAllphonebooks(@PathVariable String projectDetailsId) {
 		List<EmployeeProjectDetails> employeeProjectDetails = employeeProjectDetailsService.findByProjectDetailsId(Long.parseLong(projectDetailsId));
+		return employeeProjectDetails;
+		
+	}
+	
+	@GetMapping("employees")
+	public List<EmployeeProjectDetails> getAllEmployees() {
+		List<EmployeeProjectDetails> employeeProjectDetails = employeeProjectDetailsService.findAll();
 		return employeeProjectDetails;
 		
 	}

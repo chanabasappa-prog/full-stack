@@ -21,4 +21,8 @@ public class EmployeeProjectDetailsService {
 	public EmployeeProjectDetails findByIdAndProjectDetailsId(Long id, Long projectDetailsId) {
 		return employeeProjectDetailsRepository.findByIdAndProjectDetailsId(id, projectDetailsId);
 	}
+	
+	public List<EmployeeProjectDetails> findAll() {
+		return employeeProjectDetailsRepository.findAll();
+	}
 }

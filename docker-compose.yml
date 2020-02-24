@@ -1,0 +1,37 @@
+version: '3.7'
+
+services: 
+  docker-mysql:
+    image: mysql/mysql-server
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=db_example
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=password
+    ports:
+      - 3306:3306
+  spring-boot-jpa-docker-webapp:
+    image: hunaidspring
+    environment:
+      - spring.datasource.url=jdbc:mysql://docker-mysql:3306/db_example?useSSL=false&allowPublicKeyRetrieval=TRUE
+      - spring.datasource.username=root
+      - spring.datasource.password=password
+      - spring.datasource.platform=mysql
+      - spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
+      - spring.jpa.hibernate.ddl-auto=create
+    depends_on:
+      - docker-mysql
+    ports:
+      - 9090:9090
+  portainer:
+    image: portainer/portainer
+    command: -H unix:///var/run/docker.sock
+    restart: always
+    ports:
+      - 9000:9000
+      - 8000:8000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+volumes:
+  portainer_data:
