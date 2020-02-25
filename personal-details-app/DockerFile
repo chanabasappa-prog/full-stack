@@ -1,0 +1,4 @@
+FROM openjdk
+RUN mkdir /usr/src/fullStack
+COPY ./target/personaldetail-0.0.1-SNAPSHOT.jar /usr/src/fullStack/personaldetail.jar
+ENTRYPOINT ["java","-jar","/usr/src/fullStack/personaldetail.jar"]
