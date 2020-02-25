@@ -4,6 +4,8 @@ import com.application.project.data.modal.ProjectDetails;
 import com.application.project.data.repository.ProjectDetailsRepository;
 import com.application.project.rest.controller.AbstractMockMvcControllerTest;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -14,11 +16,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProjectDetailsServiceTest extends AbstractMockMvcControllerTest {
 
-    @Autowired
-    private ProjectDetailsService projectDetailsService;
-
-    @MockBean
+    @Mock
     private ProjectDetailsRepository projectDetailsRepository;
+
+    @InjectMocks
+    private ProjectDetailsService projectDetailsService;
 
     private Optional<ProjectDetails> projectDetailsList;
 
@@ -31,11 +33,16 @@ public class ProjectDetailsServiceTest extends AbstractMockMvcControllerTest {
         ProjectDetails projectDetails = new ProjectDetails();
         projectDetails.setName("Hunaid");
         projectDetailsList = Optional.of(projectDetails);
-
-        Mockito.when(projectDetailsRepository.findById(Mockito.any()))
-                .thenReturn(projectDetailsList);
+        Mockito.doReturn(projectDetailsList).when(projectDetailsRepository).findById(Mockito.any());
+/*        Mockito.when(projectDetailsRepository.findById(Mockito.any()))
+                .thenReturn(projectDetailsList);*/
         ProjectDetails found = projectDetailsService.findById(id);
 
         assertThat(name).isEqualTo(found.getName());
     }
+   @Test
+   public void whenValidId_thenasdBeFound() {
+       String name="A";
+       assertThat("A").isEqualTo(name);
+   }
 }
