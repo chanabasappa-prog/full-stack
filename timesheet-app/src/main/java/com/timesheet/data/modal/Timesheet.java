@@ -5,9 +5,16 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity(name = "TIMESHEET")
@@ -21,8 +28,11 @@ public class Timesheet {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="employee_id")
-	private Long employeeId;
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "employee_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Employee employeeDetails;
 	
 	@Column(name="timesheet_date")
 	private Date timesheetDate;
@@ -35,12 +45,7 @@ public class Timesheet {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getEmployeeId() {
-		return employeeId;
-	}
-	public void setEmployeeId(Long employeeId) {
-		this.employeeId = employeeId;
-	}
+	
 	public Date getTimesheetDate() {
 		return timesheetDate;
 	}
@@ -53,14 +58,17 @@ public class Timesheet {
 	public void setHours(Long hours) {
 		this.hours = hours;
 	}
+	public Employee getEmployeeDetails() {
+		return employeeDetails;
+	}
+	public void setEmployeeDetails(Employee employeeDetails) {
+		this.employeeDetails = employeeDetails;
+	}
 	@Override
 	public String toString() {
-		return "Timesheet [id=" + id + ", employeeId=" + employeeId + ", timesheetDate=" + timesheetDate + ", hours="
-				+ hours + "]";
+		return "Timesheet [id=" + id + ", employeeDetails=" + employeeDetails + ", timesheetDate=" + timesheetDate
+				+ ", hours=" + hours + "]";
 	}
 	
-	
-	
-
 	
 }

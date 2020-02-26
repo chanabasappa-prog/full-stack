@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.timesheet.data.modal.Timesheet;
+import com.timesheet.service.EmployeeDetailsService;
 import com.timesheet.service.TimesheetService;
 
 @RestController()
@@ -25,9 +26,19 @@ public class TimesheetController {
 	@Autowired
     private TimesheetService timesheetsService;
 
+	@Autowired
+    private EmployeeDetailsService employeeDetailsService;
+
 	@GetMapping("/timesheets")
 	public List<Timesheet> getAllTimesheets() {
 		List<Timesheet> timesheets = timesheetsService.list();
+		return timesheets;
+		
+	}
+	
+	@GetMapping("/timesheets/employees/{employeeId}")
+	public List<Timesheet> getAllTimesheetsOfEmployee(@PathVariable String employeeId) {
+		List<Timesheet> timesheets = employeeDetailsService.findByEmplyeeId(new Long(employeeId));
 		return timesheets;
 		
 	}
