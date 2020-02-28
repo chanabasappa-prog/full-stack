@@ -2,4 +2,4 @@ language: java
 jdk: oraclejdk9
 sudo: required
 install: true
-script: ./project-details-app/mvnw clean install
+script: ./project-details-app/mvn clean install
