@@ -4,3 +4,7 @@ dist: trusty
 sudo: required
 install: true
 script: cd project-details-app && mvn clean install
+services:
+  - docker
+before_install:
+  - docker build -t hunaidspring
