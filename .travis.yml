@@ -7,4 +7,4 @@ script: cd project-details-app && mvn clean install
 services:
   - docker
 before_install:
-  - docker build -t hunaidspring -f ./project-details-app .
+  - docker build -t hunaidspring -f ./project-details-app/Dockerfile .
