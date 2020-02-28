@@ -1,4 +1,4 @@
-package com.application.project.rest.controller;
+package com.application.project;
 
 
 import org.junit.runner.RunWith;
@@ -9,15 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-//@AutoConfigureMockMvc
+
 abstract public class AbstractMockMvcControllerTest {
 	
-/*
-	protected MockMvc mockMvc;
-	
-	@Test
-	public void TestSomething() {
-		boolean testVar=true;
-		assertTrue(testVar);
-	}*/
 }

@@ -1,6 +1,6 @@
 package com.application.project.service;
 
-import com.application.project.rest.controller.AbstractMockMvcControllerTest;
+import com.application.project.AbstractMockMvcControllerTest;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
