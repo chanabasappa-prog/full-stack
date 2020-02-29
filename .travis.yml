@@ -6,5 +6,8 @@ install: true
 script: cd project-details-app && mvn clean install
 services:
   - docker
-before_install:
-  - docker build -t hunaidspring -f ./project-details-app/Dockerfile-travis .
+after_success:
+  - docker build -t hunaidee/full-stack -f ./project-details-app/Dockerfile-travis .
+  - docker login -u $DOCKER_USER_NAME -p $DOCKER_HUB_PASSWORD
+  - docker tag hunaidee/full-stack:first hunaidee/full-stack:first
+  - docker push hunaidee/full-stack
