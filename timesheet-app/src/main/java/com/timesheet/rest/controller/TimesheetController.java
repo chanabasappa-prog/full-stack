@@ -20,7 +20,6 @@ import com.timesheet.service.EmployeeDetailsService;
 import com.timesheet.service.TimesheetService;
 
 @RestController()
-
 public class TimesheetController {
 	
 	@Autowired
