@@ -11,3 +11,15 @@ after_success:
   - docker login -u $DOCKER_USER_NAME -p $DOCKER_HUB_PASSWORD
   - docker tag hunaidee/full-stack:first hunaidee/full-stack:first
   - docker push hunaidee/full-stack
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "full-stack-aws"
+  env: "FullStackAws-env"
+  bucket_name: "elasticbeanstalk-us-east-2-550444087576"
+  bucket_path: "full-stack-aws"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
