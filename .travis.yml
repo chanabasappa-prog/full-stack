@@ -9,13 +9,13 @@ services:
 after_success:
   - docker build -t hunaidee/full-stack -f ./Dockerfile-travis .
   - docker login -u $DOCKER_USER_NAME -p $DOCKER_HUB_PASSWORD
-  - docker tag hunaidee/full-stack:first hunaidee/full-stack:first
+  - docker tag hunaidee/full-stack:latest hunaidee/full-stack:latest
   - docker push hunaidee/full-stack
   - pip install --user awscli # install aws cli w/o sudo
   - export PATH=$PATH:$HOME/.local/bin # put aws in the path
   - eval $(aws ecr get-login --region us-east-2) #needs AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY envvars
-  - docker tag hunaidee/full-stack:first 550444087576.dkr.ecr.us-east-2.amazonaws.com/full-stack:first
-  - docker push 550444087576.dkr.ecr.us-east-2.amazonaws.com/full-stack:first
+  - docker tag hunaidee/full-stack:latest 550444087576.dkr.ecr.us-east-2.amazonaws.com/full-stack:latest
+  - docker push 550444087576.dkr.ecr.us-east-2.amazonaws.com/full-stack:latest
 
 deploy:
   provider: elasticbeanstalk
