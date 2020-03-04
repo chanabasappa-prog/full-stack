@@ -5,15 +5,14 @@ import com.application.project.data.modal.ProjectDetails;
 import com.application.project.service.ProjectDetailsService;
 import org.hamcrest.Matchers;
 import org.hamcrest.collection.IsCollectionWithSize;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
@@ -27,7 +26,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class ProjectDetailsControllerTest extends AbstractMockMvcControllerTest {
 
-    @Mock
+
+    @MockBean
     private ProjectDetailsService projectDetailsService;
 
     @Autowired
@@ -36,7 +36,7 @@ public class ProjectDetailsControllerTest extends AbstractMockMvcControllerTest 
 
 
     @Test
-    public void givenEmployees_whenGetEmployees_thenReturnJsonArray()
+    public void whenGetEmployees_thenReturnJsonArray()
             throws Exception {
 
         List<ProjectDetails> projectDetailsList = new ArrayList<>();

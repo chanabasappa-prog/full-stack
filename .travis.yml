@@ -11,6 +11,12 @@ after_success:
   - docker login -u $DOCKER_USER_NAME -p $DOCKER_HUB_PASSWORD
   - docker tag hunaidee/full-stack:first hunaidee/full-stack:first
   - docker push hunaidee/full-stack
+  - pip install --user awscli # install aws cli w/o sudo
+  - export PATH=$PATH:$HOME/.local/bin # put aws in the path
+  - eval $(aws ecr get-login --region us-east-2) #needs AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY envvars
+  - docker tag hunaidee/full-stack:first 550444087576.dkr.ecr.us-east-2.amazonaws.com/full-stack:first
+  - docker push 550444087576.dkr.ecr.us-east-2.amazonaws.com/full-stack:first
+
 deploy:
   provider: elasticbeanstalk
   region: "us-east-2"
@@ -20,6 +26,6 @@ deploy:
   bucket_path: "full-stack-aws"
   on:
     branch: master
-  access_key_id: $AWS_ACCESS_KEY
+  access_key_id: $AWS_ACCESS_KEY_ID
   secret_access_key:
-    secure: $AWS_SECRET_KEY
+    secure: $AWS_SECRET_ACCESS_KEY

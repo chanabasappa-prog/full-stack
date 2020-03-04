@@ -12,7 +12,7 @@ import com.application.project.service.EmployeeProjectDetailsService;
 
 @RestController()
 public class EmployeeProjectDetailsController {
-	
+
 	@Autowired
     private EmployeeProjectDetailsService employeeProjectDetailsService;
 	
