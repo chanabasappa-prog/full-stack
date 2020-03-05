@@ -1,11 +1,11 @@
-language: java
-jdk: oraclejdk9
-dist: trusty
+language: java # setting the language enables Travis to create a Java Docker container to execure further steps
+jdk: oraclejdk9 # Version of Java
+dist: trusty # This is required if maven dependencies are on HTTPS
 sudo: required
-install: true
+install: true # 'true' makes the install script to execute nothing.
 script: cd project-details-app && mvn clean install
 services:
-  - docker
+  - docker # Docker container will install Docker
 after_success:
   - docker build -t hunaidee/full-stack -f ./Dockerfile-travis .
   - docker login -u $DOCKER_USER_NAME -p $DOCKER_HUB_PASSWORD
