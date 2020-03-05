@@ -1,4 +1,2 @@
-FROM openjdk
-RUN mkdir /usr/src/myapp
-COPY ./target/project-details-app-0.0.1-SNAPSHOT.jar /usr/src/myapp/app.jar
-ENTRYPOINT ["java","-jar","/usr/src/myapp/app.jar"]
+FROM 550444087576.dkr.ecr.us-east-2.amazonaws.com/full-stack-aws:latest
+EXPOSE 9090
