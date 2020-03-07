@@ -10,12 +10,12 @@ script:
 services:
   - docker # Docker container will install Docker
 after_success:
-  - docker build -t hunaidee/full-stack -f ./Dockerfile-travis .
+  - docker build -t hunaidee/project-details -f ./Dockerfile-travis .
   - docker login -u $DOCKER_USER_NAME -p $DOCKER_HUB_PASSWORD
-  - docker tag hunaidee/full-stack:latest hunaidee/full-stack:latest
-  - docker push hunaidee/full-stack
+  - docker tag hunaidee/project-details:latest hunaidee/project-details:latest
+  - docker push hunaidee/project-details
   - pip install --user awscli # install aws cli w/o sudo
   - export PATH=$PATH:$HOME/.local/bin # put aws in the path
   - eval $(aws ecr get-login --no-include-email --region us-east-2) #needs AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY envvars
-  - docker tag hunaidee/full-stack:latest 550444087576.dkr.ecr.us-east-2.amazonaws.com/full-stack-aws:latest
-  - docker push 550444087576.dkr.ecr.us-east-2.amazonaws.com/full-stack-aws:latest
+  - docker tag hunaidee/project-details:latest 550444087576.dkr.ecr.us-east-2.amazonaws.com/project-details:latest
+  - docker push 550444087576.dkr.ecr.us-east-2.amazonaws.com/fproject-details:latest
