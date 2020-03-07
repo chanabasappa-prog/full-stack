@@ -2,7 +2,9 @@ package com.application.project.rest.controller;
 
 import java.util.List;
 
+import com.application.project.service.exceptions.ProjectDetailsNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.application.project.data.modal.ProjectDetails;
 import com.application.project.service.ProjectDetailsService;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController()
 
@@ -26,9 +29,16 @@ public class ProjectDetailsController {
 		
 	}
 
+
 	@GetMapping("projectdetails/{projectdetailsId}")
 	public ProjectDetails getPhoneBookById(@PathVariable String projectdetailsId) {
-		return projectDetailsService.findById(Long.parseLong(projectdetailsId));
+		try{
+			return projectDetailsService.findById(Long.parseLong(projectdetailsId));
+		}catch (ProjectDetailsNotFoundException exception){
+			throw new ResponseStatusException(
+					HttpStatus.NOT_FOUND, "Project Details with id "+projectdetailsId+" Not Found", exception);
+		}
+
 	}
 	
 	@PostMapping("/projectdetails")

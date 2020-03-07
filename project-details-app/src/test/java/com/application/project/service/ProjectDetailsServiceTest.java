@@ -3,6 +3,7 @@ package com.application.project.service;
 import com.application.project.data.modal.ProjectDetails;
 import com.application.project.data.repository.ProjectDetailsRepository;
 import com.application.project.AbstractMockMvcControllerTest;
+import com.application.project.service.exceptions.ProjectDetailsNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -34,7 +35,12 @@ public class ProjectDetailsServiceTest extends AbstractMockMvcControllerTest {
         Mockito.doReturn(projectDetailsList).when(projectDetailsRepository).findById(Mockito.any());
 /*        Mockito.when(projectDetailsRepository.findById(Mockito.any()))
                 .thenReturn(projectDetailsList);*/
-        ProjectDetails found = projectDetailsService.findById(id);
+        ProjectDetails found = null;
+        try {
+            found = projectDetailsService.findById(id);
+        } catch (ProjectDetailsNotFoundException e) {
+            e.printStackTrace();
+        }
 
         assertThat(name).isEqualTo(found.getName());
     }
