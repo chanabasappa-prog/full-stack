@@ -18,4 +18,4 @@ after_success:
   - export PATH=$PATH:$HOME/.local/bin # put aws in the path
   - eval $(aws ecr get-login --no-include-email --region us-east-2) #needs AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY envvars
   - docker tag hunaidee/project-details:latest 550444087576.dkr.ecr.us-east-2.amazonaws.com/project-details:latest
-  - docker push 550444087576.dkr.ecr.us-east-2.amazonaws.com/fproject-details:latest
+  - docker push 550444087576.dkr.ecr.us-east-2.amazonaws.com/project-details:latest
