@@ -4,6 +4,7 @@ import com.application.project.data.modal.ProjectDetails;
 import com.application.project.data.repository.ProjectDetailsRepository;
 import com.application.project.AbstractMockMvcControllerTest;
 import com.application.project.service.exceptions.ProjectDetailsNotFoundException;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -33,8 +34,6 @@ public class ProjectDetailsServiceTest extends AbstractMockMvcControllerTest {
         projectDetails.setName("Hunaid");
         projectDetailsList = Optional.of(projectDetails);
         Mockito.doReturn(projectDetailsList).when(projectDetailsRepository).findById(Mockito.any());
-/*        Mockito.when(projectDetailsRepository.findById(Mockito.any()))
-                .thenReturn(projectDetailsList);*/
         ProjectDetails found = null;
         try {
             found = projectDetailsService.findById(id);
@@ -45,8 +44,15 @@ public class ProjectDetailsServiceTest extends AbstractMockMvcControllerTest {
         assertThat(name).isEqualTo(found.getName());
     }
    @Test
-   public void whenValidId_thenasdBeFound() {
-       String name="A";
-       assertThat("A").isEqualTo(name);
+   public void whenInValidId_thenThrowException() {
+
+       Optional<ProjectDetails> projectDetails = Optional.empty();
+
+       Mockito.doReturn(projectDetails).when(projectDetailsRepository).findById(Mockito.any());
+       org.junit.jupiter.api.Assertions.assertThrows(ProjectDetailsNotFoundException.class, () -> {
+           projectDetailsService.findById(1l);
+       });
+
+
    }
 }

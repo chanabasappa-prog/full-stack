@@ -42,6 +42,7 @@ public class ProjectDetailsControllerTest extends AbstractMockMvcControllerTest 
         List<ProjectDetails> projectDetailsList = new ArrayList<>();
         ProjectDetails projectDetails = new ProjectDetails();
         projectDetails.setName("Hunaid");
+        projectDetails.setId(1l);
         projectDetailsList.add(projectDetails);
 
         Mockito.doReturn(projectDetailsList).when(projectDetailsService).list();
