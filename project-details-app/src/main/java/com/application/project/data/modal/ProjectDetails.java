@@ -2,6 +2,8 @@ package com.application.project.data.modal;
 
 
 
+import org.springframework.hateoas.RepresentationModel;
+
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -12,7 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity(name = "PROJECTDETAILS")
-public class ProjectDetails {
+public class ProjectDetails extends RepresentationModel<ProjectDetails> {
 
 	public ProjectDetails() {
 		super();

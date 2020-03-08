@@ -17,7 +17,7 @@ public class EmployeeProjectDetailsController {
     private EmployeeProjectDetailsService employeeProjectDetailsService;
 	
 	@GetMapping("projectdetails/{projectDetailsId}/employees")
-	public List<EmployeeProjectDetails> getAllphonebooks(@PathVariable String projectDetailsId) {
+	public List<EmployeeProjectDetails> getAllEmployeedForProject(@PathVariable String projectDetailsId) {
 		List<EmployeeProjectDetails> employeeProjectDetails = employeeProjectDetailsService.findByProjectDetailsId(Long.parseLong(projectDetailsId));
 		return employeeProjectDetails;
 		
