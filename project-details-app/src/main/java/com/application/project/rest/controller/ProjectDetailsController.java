@@ -6,6 +6,7 @@ import com.application.project.service.exceptions.ProjectDetailsNotFoundExceptio
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -21,6 +22,7 @@ public class ProjectDetailsController {
     @Autowired
     private ProjectDetailsService projectDetailsService;
 
+    @PreAuthorize("#oauth2.hasScope('read')")
     @GetMapping("projectdetails")
     public List<ProjectDetails> getAllphonebooks() {
         List<ProjectDetails> projectDetails = projectDetailsService.list();

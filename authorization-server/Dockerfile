@@ -1,0 +1,5 @@
+FROM openjdk
+RUN mkdir /usr/src/myapp
+COPY ./target/project-details-app-0.0.1-SNAPSHOT.jar /usr/src/myapp/app.jar
+EXPOSE 80
+ENTRYPOINT ["java","-jar","/usr/src/myapp/app.jar"]
