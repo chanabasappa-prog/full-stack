@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Date;
 
-@Entity(name = "CLAIMDETAILS")
+@Entity(name = "CLAIMDETAIL")
 public class ClaimDetail {
 
     public ClaimDetail() {
