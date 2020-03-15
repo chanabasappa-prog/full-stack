@@ -22,7 +22,8 @@ public class ProjectDetailsController {
     @Autowired
     private ProjectDetailsService projectDetailsService;
 
-    @PreAuthorize("#oauth2.hasScope('read')")
+    @PreAuthorize("#oauth2.hasScope('read') and hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @GetMapping("projectdetails")
     public List<ProjectDetails> getAllphonebooks() {
         List<ProjectDetails> projectDetails = projectDetailsService.list();
@@ -40,7 +41,7 @@ public class ProjectDetailsController {
 
     }
 
-
+    @PreAuthorize("#oauth2.hasScope('read') and hasRole('USER')")
     @GetMapping("projectdetails/{projectdetailsId}")
     public ProjectDetails getPhoneBookById(@PathVariable String projectdetailsId) {
         try {

@@ -1,1 +1,5 @@
 /.idea/
+/ui-employee-app/src/main/resources/static/built/
+/ui-employee-app/node_modules/**
+/ui-employee-app/node_modules/.bin/
+/ui-employee-app/node_modules/@babel/
