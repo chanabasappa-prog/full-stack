@@ -15,14 +15,21 @@ class App extends React.Component { // <1>
 	}
 
 	componentDidMount() { // <2>
-		client({method: 'GET', path: '/api/employees'}).done(response => {
+	    fetch('http://localhost:9191/projectdetails', {
+           method: 'get',
+           headers: new Headers({
+             // Your header content
+           })
+         });
+		/*client({method: 'GET', path: 'http://localhost:9191/projectdetails'}).done(response => {
 			this.setState({employees: response.entity._embedded.employees});
-		});
+		});*/
 	}
 
 	render() { // <3>
 		return (
-		<div>Hunaid herer
+		<div><a href="http://localhost:9090/oauth/authorize?client_id=clientIdPassword&scope=read&state=940589&redirect_uri=http%3A%2F%2Flocalhost%3A8181%2Foauth-code&response_type=code">click</a>
+
 			<EmployeeList employees={this.state.employees}/>
 			</div>
 		)

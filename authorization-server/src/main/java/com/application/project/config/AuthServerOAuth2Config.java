@@ -44,6 +44,7 @@ public class AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapter
                 .and()
                 .withClient("clientIdPassword")
                 .secret("{noop}secret")
+                .redirectUris("http://localhost:8181/oauth-code")
                 .authorizedGrantTypes(
                         "password", "authorization_code", "refresh_token")
                 .scopes("read");
