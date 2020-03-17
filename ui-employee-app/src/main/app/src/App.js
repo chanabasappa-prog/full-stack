@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import Cookies from 'js-cookie';
 import './App.css';
+import { Button } from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import ListGroup from 'react-bootstrap/ListGroup';
+
 
 class App extends Component {
   constructor(props) {
@@ -52,15 +58,16 @@ class App extends Component {
 
   render() {
     return <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" /> 
-        {this.state.token ? (<a href="#" className="App-link" onClick={this.logout}>Logout</a>) : (<p></p>)}
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-          Hunaid here
-      </p>
+      
+      
+        
+      
+        
+        
 
-        {this.state.token ? (
+<Container>
+  <Row>
+    <Col>{this.state.token ? (
           <p>Logged In Already</p>
         ) : (
             <p><a
@@ -71,18 +78,23 @@ class App extends Component {
             >
               Login
         </a></p>
-          )}
-        {this.state.token ? (
-          <ul>
+          )}</Col>
+    <Col>{this.state.token ? (<a href="#" className="App-link" onClick={this.logout}>Logout</a>) : (<p></p>)}</Col>
+  </Row>
+  <Row>
+    <Col>1 of 3</Col>
+    <Col>{this.state.token ? (
+          <ListGroup>
             {this.state.projectDetails.map(item => (
-              <li key={item.name}>
+              <ListGroup.Item key={item.name}>
                 {item.name}
-              </li>
+              </ListGroup.Item>
             ))}
-          </ul>
-        ) : (<p></p>)}
-
-      </header>
+          </ListGroup>
+        ) : (<p></p>)}</Col>
+    <Col>3 of 3</Col>
+  </Row>
+</Container>
     </div>
   }
 }
