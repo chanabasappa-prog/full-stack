@@ -24,6 +24,9 @@ Full Stack application - Spring, Microservice and React
 **Devops Flow**
 ![DevOps Flow](https://github.com/chanabasappa-prog/full-stack/blob/master/DevOps.PNG)
 
+**OAuth 2 - Authorization Code Flow**
+![Authorization Code Flow](https://github.com/chanabasappa-prog/full-stack/blob/master/Authorization_code_flow.png)
+
 
 
 
