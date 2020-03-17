@@ -17,13 +17,14 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController()
 
+@CrossOrigin(origins = "http://localhost:8181", allowedHeaders = "*")
 public class ProjectDetailsController {
 
     @Autowired
     private ProjectDetailsService projectDetailsService;
 
+    @CrossOrigin(origins = "http://localhost:8181", allowedHeaders = "*")
     @PreAuthorize("#oauth2.hasScope('read') and hasRole('ADMIN')")
-    //@PreAuthorize("hasRole('ADMIN')")
     @GetMapping("projectdetails")
     public List<ProjectDetails> getAllphonebooks() {
         List<ProjectDetails> projectDetails = projectDetailsService.list();

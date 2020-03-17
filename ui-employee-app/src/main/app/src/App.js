@@ -1,0 +1,90 @@
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import Cookies from 'js-cookie';
+import './App.css';
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.logout = this.logout.bind(this);
+    this.state = {
+      isLoaded: true,
+      token: Cookies.get('access_token_cookie'),
+      projectDetails: []
+    }
+  }
+
+  logout() {
+    console.log("herer")
+    Cookies.remove('access_token_cookie');
+    this.setState({ token: null });
+
+  }
+  componentDidMount() {
+    if (this.state.token != null) {
+      fetch("http://localhost:9191/projectdetails", {
+        headers: new Headers({
+          'Authorization': 'Bearer ' + this.state.token
+        }),
+      })
+        .then(res => res.json())
+        .then(
+          (result) => {
+            console.log(result)
+            this.setState({
+              isLoaded: true,
+              projectDetails: result
+            });
+          },
+          // Note: it's important to handle errors here
+          // instead of a catch() block so that we don't swallow
+          // exceptions from actual bugs in components.
+          (error) => {
+            this.setState({
+              isLoaded: true,
+              error
+            });
+          }
+        )
+    }
+
+  }
+
+  render() {
+    return <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" /> 
+        {this.state.token ? (<a href="#" className="App-link" onClick={this.logout}>Logout</a>) : (<p></p>)}
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+          Hunaid here
+      </p>
+
+        {this.state.token ? (
+          <p>Logged In Already</p>
+        ) : (
+            <p><a
+              className="App-link"
+              href="http://localhost:9090/oauth/authorize?client_id=clientIdPassword&scope=read&state=940589&redirect_uri=http%3A%2F%2Flocalhost%3A8181%2Foauth-code&response_type=code"
+              target="_self"
+              rel="noopener noreferrer"
+            >
+              Login
+        </a></p>
+          )}
+        {this.state.token ? (
+          <ul>
+            {this.state.projectDetails.map(item => (
+              <li key={item.name}>
+                {item.name}
+              </li>
+            ))}
+          </ul>
+        ) : (<p></p>)}
+
+      </header>
+    </div>
+  }
+}
+
+export default App
