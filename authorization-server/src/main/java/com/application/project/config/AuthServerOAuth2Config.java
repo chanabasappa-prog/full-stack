@@ -6,9 +6,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
@@ -19,7 +21,15 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 @Configuration
 @EnableAuthorizationServer
+@EnableResourceServer
 public class AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapter {
+
+    private final PasswordEncoder passwordEncoder;
+
+    public AuthServerOAuth2Config(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
+
     @Autowired
     @Qualifier("authenticationManagerBean")
     private AuthenticationManager authenticationManager;
@@ -30,7 +40,7 @@ public class AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapter
             throws Exception {
         oauthServer
                 .tokenKeyAccess("permitAll()")
-                .checkTokenAccess("isAuthenticateAuthorizationServerEndpointsConfigurerd()");
+                .checkTokenAccess("isAuthenticated()");
     }
 
     @Override
@@ -43,11 +53,11 @@ public class AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapter
                 .autoApprove(true)
                 .and()
                 .withClient("clientIdPassword")
-                .secret("{noop}secret")
-                .redirectUris("http://localhost:8181/oauth-code")
+                .secret(passwordEncoder.encode("secret"))
+                .redirectUris("http://localhost:8181/login/oauth2/code/full-stack")
                 .authorizedGrantTypes(
                         "password", "authorization_code", "refresh_token")
-                .scopes("read");
+                .scopes("read","user_info");
     }
 
     @Override

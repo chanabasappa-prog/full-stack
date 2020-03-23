@@ -6,9 +6,12 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -18,11 +21,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.security.Principal;
 
-@RestController()
+@Controller()
 public class OauthController {
 
-    @GetMapping("oauth-code")
+    @RequestMapping("/securedPage")
+    public String securedPage(Model model, Principal principal) {
+        System.out.println("in SecuredPage");
+        return "securedPage";
+    }
+    @RequestMapping("/")
+    public String index(Model model, Principal principal) {
+        System.out.println("in Index");
+        return "index";
+    }
+
+    /*@GetMapping("oauth-code")
     public void getPhoneBookById(@RequestParam String code, @RequestParam String state, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         System.out.println("--- code : " + code + " , state : "+ state );
 
@@ -61,5 +76,5 @@ public class OauthController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }

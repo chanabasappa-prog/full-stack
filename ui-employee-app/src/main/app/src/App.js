@@ -72,7 +72,7 @@ class App extends Component {
         ) : (
             <p><a
               className="App-link"
-              href="http://localhost:9090/oauth/authorize?client_id=clientIdPassword&scope=read&state=940589&redirect_uri=http%3A%2F%2Flocalhost%3A8181%2Foauth-code&response_type=code"
+              href="securedPage"
               target="_self"
               rel="noopener noreferrer"
             >
