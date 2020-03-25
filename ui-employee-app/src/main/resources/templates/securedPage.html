@@ -10,7 +10,22 @@
             src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
+<script type="text/javascript">
+    $.get("/user", function(data) {
+        $("#user").html(data.name);
+        $(".unauthenticated").hide()
+        $(".authenticated").show()
+    });
+</script>
 <h1>Secured Page</h1>
 <!--<span th:text="${#authentication.name}"></span>-->
+<a href="logout">Logout</a>
+
+Logged in as: <span id="user"></span>
+
+
+<div id="react"></div>
+
+<script src="built/bundle.js"></script>
 </body>
 </html>

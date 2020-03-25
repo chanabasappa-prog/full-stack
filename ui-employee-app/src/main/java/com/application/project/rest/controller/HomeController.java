@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.Collections;
 import java.util.Map;
@@ -25,7 +26,7 @@ public class HomeController {
 
 
     @GetMapping("/user")
-    public Map<String, Object> user(@AuthenticationPrincipal OAuth2User principal ) {
+    public Map<String, Object> user(@AuthenticationPrincipal OAuth2User principal, HttpServletRequest httpServletRequest) {
         System.out.println("In / user/me " +principal.getName());
         System.out.println("In / hashCode " +principal.hashCode());
 
@@ -43,6 +44,7 @@ public class HomeController {
 
         String accessToken = client.getAccessToken().getTokenValue();
         System.out.println("accessToken : " + accessToken);
+        httpServletRequest.getSession().setAttribute("token",accessToken);
         return Collections.singletonMap("name", principal.getAttribute("name"));
     }
 }
