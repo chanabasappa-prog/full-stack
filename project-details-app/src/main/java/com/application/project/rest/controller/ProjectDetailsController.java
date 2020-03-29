@@ -24,7 +24,7 @@ public class ProjectDetailsController {
     private ProjectDetailsService projectDetailsService;
 
     @CrossOrigin(origins = "http://localhost:8181", allowedHeaders = "*")
-    @PreAuthorize("#oauth2.hasScope('read') and hasRole('ADMIN')")
+    @PreAuthorize("#oauth2.hasScope('read') and hasRole('USER')")
     @GetMapping("projectdetails")
     public List<ProjectDetails> getAllphonebooks() {
         List<ProjectDetails> projectDetails = projectDetailsService.list();

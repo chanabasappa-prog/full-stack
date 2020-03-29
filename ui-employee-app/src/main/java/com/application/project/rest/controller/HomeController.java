@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -24,11 +25,11 @@ public class HomeController {
     OAuth2AuthorizedClientService OAuth2AuthorizedClientService;
 
 
-
     @GetMapping("/user")
-    public Map<String, Object> user(@AuthenticationPrincipal OAuth2User principal, HttpServletRequest httpServletRequest) {
-        System.out.println("In / user/me " +principal.getName());
-        System.out.println("In / hashCode " +principal.hashCode());
+    public Map<String, String> user(@AuthenticationPrincipal OAuth2User principal, HttpServletRequest httpServletRequest) {
+        System.out.println("In / user/me " + principal.getName());
+
+        System.out.println("In / hashCode " + principal.hashCode());
 
         Authentication authentication =
                 SecurityContextHolder
@@ -44,7 +45,10 @@ public class HomeController {
 
         String accessToken = client.getAccessToken().getTokenValue();
         System.out.println("accessToken : " + accessToken);
-        httpServletRequest.getSession().setAttribute("token",accessToken);
-        return Collections.singletonMap("name", principal.getAttribute("name"));
+        httpServletRequest.getSession().setAttribute("token", accessToken);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("name", principal.getAttribute("name"));
+        map.put("token", accessToken);
+        return map;//Collections.singletonMap("name", principal.getAttribute("name"));
     }
 }

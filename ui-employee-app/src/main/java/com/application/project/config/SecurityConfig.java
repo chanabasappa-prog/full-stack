@@ -22,7 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .oauth2Login();*/
         // @formatter:on
         http.antMatcher("/**").authorizeRequests()
-                .antMatchers("/", "/login**").permitAll()
+                .antMatchers("/", "/login**","/static/**","/build/**","/manifest.json","/logo192.png").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .oauth2Login().and().logout().invalidateHttpSession(true).logoutUrl("/logout").logoutSuccessUrl("/");

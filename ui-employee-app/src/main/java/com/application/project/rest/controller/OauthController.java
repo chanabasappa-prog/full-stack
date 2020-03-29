@@ -29,7 +29,7 @@ public class OauthController {
     @RequestMapping("/securedPage")
     public String securedPage(Model model, Principal principal) {
         System.out.println("in SecuredPage");
-        return "securedPage";
+        return "index";
     }
     @RequestMapping("/")
     public String index(Model model, Principal principal) {
