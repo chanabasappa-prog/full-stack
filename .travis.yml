@@ -4,12 +4,13 @@ dist: trusty # This is required if maven dependencies are on HTTPS
 sudo: required
 install: true # 'true' makes the install script to execute nothing.
 script:
-  - cd project-details-app && mvn clean install && cd ..
-  - cd personal-details-app  && mvn clean install && cd ..
-  - cd project-details-app
+  - cd authorization-server && mvn clean install && cd ..
+  - cd project-details-app  && mvn clean install && cd ..
+  - cd ui-employee-app  && mvn clean install && cd ..
 services:
   - docker # Docker container will install Docker
 after_success:
+  - cd project-details-app
   - docker build -t hunaidee/project-details -f ./Dockerfile-travis .
   - docker login -u $DOCKER_USER_NAME -p $DOCKER_HUB_PASSWORD
   - docker tag hunaidee/project-details:latest hunaidee/project-details:latest
@@ -19,3 +20,13 @@ after_success:
   - eval $(aws ecr get-login --no-include-email --region us-east-2) #needs AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY envvars
   - docker tag hunaidee/project-details:latest 550444087576.dkr.ecr.us-east-2.amazonaws.com/project-details:latest
   - docker push 550444087576.dkr.ecr.us-east-2.amazonaws.com/project-details:latest
+  - cd ..
+  - cd authorization-server
+  - docker build -t hunaidee/authorization-server -f ./Dockerfile-travis .
+  - docker tag hunaidee/authorization-server:latest 550444087576.dkr.ecr.us-east-2.amazonaws.com/authorization-server:latest
+  - docker push 550444087576.dkr.ecr.us-east-2.amazonaws.com/authorization-server:latest
+  - cd ..
+  - cd ui-employee-app
+  - docker build -t hunaidee/ui-employee-app -f ./Dockerfile-travis .
+  - docker tag hunaidee/ui-employee-app:latest 550444087576.dkr.ecr.us-east-2.amazonaws.com/ui-employee-app:latest
+  - docker push 550444087576.dkr.ecr.us-east-2.amazonaws.com/ui-employee-app:latest
