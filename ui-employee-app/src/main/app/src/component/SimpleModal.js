@@ -2,16 +2,8 @@ import 'date-fns';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import DateFnsUtils from '@date-io/date-fns';
 import Button from '@material-ui/core/Button';
-
-import {
-    MuiPickersUtilsProvider,
-    KeyboardTimePicker,
-    KeyboardDatePicker,
-} from '@material-ui/pickers';
 
 function rand() {
     return Math.round(Math.random() * 20) - 10;
@@ -57,10 +49,6 @@ export default function SimpleModal(props) {
 
     const handleClose = () => {
         setOpen(false);
-    };
-
-    const handleDateChange = date => {
-        // setSelectedDate(date);
     };
 
     const submitProject = () => {
