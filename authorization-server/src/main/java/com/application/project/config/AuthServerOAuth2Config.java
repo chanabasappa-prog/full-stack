@@ -54,7 +54,8 @@ public class AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapter
                 .and()
                 .withClient("clientIdPassword")
                 .secret(passwordEncoder.encode("secret"))
-                .redirectUris("http://localhost:8181/login/oauth2/code/full-stack")
+                //.redirectUris("http://localhost:8080/oauth2/callback/fullstack")
+                .redirectUris("http://localhost:8181/oauth2/code/full-stack")
                 .authorizedGrantTypes(
                         "password", "authorization_code", "refresh_token")
                 .scopes("read","user_info");
