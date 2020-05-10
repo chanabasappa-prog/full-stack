@@ -35,7 +35,7 @@ public class UserController {
         map.put("name", "Hunaid Hsusain");
         return map;*/
 
-      /*  Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("name", principal.getName());
         if(principal.getName().equals("hunaid")){
             map.put("id", "hunaidee");
@@ -43,9 +43,9 @@ public class UserController {
         }else{
             map.put("id", "johnee");
             map.put("email", "johnee007@gmail.com");
-        }*/
+        }
 
-        //return map;
-        return Collections.singletonMap("name", principal.getName());
+        return map;
+        //return Collections.singletonMap("name", principal.getName());
     }
 }
